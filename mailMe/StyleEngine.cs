@@ -56,7 +56,7 @@ namespace mailMe
         [ComVisible(true)]
         string IStyleEngine.Date()
         {
-            return "2009-12-27";
+            return "2009-12-28";
         }
 
         [ComVisible(true)]
@@ -100,7 +100,7 @@ namespace mailMe
         [ComVisible(true)]
         int IStyleEngine.Revision()
         {
-            return 4;
+            return 5;
         }
 
         [ComVisible(true)]

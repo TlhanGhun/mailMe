@@ -35,7 +35,7 @@ RequestExecutionLevel admin
 !define MUI_HEADERIMAGE_BITMAP "tlhanGhun.bmp"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "tlhanGhunWelcome.bmp"
 !define MUI_WELCOMEPAGE_TITLE "Snarl style Mail me"
-!define MUI_WELCOMEPAGE_TEXT "Sends the notifications as an email"
+!define MUI_WELCOMEPAGE_TEXT "Sends the notifications as an email$\r$\n$\r$\nPlease stop Snarl prior to installation."
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Tlhan Ghun\Styles\Mail me"
 !define MUI_ICON "mailMe.ico"
 !define MUI_UNICON "uninstall.ico"

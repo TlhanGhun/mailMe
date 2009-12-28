@@ -69,6 +69,12 @@ namespace mailMe
             snarlText = NotificationInfo.Text;
             snarlTitle = NotificationInfo.Title;
 
+            if (Properties.Settings.Default.mailServerHost == string.Empty || Properties.Settings.Default.username == string.Empty)
+            {
+                MessageBox.Show("Please set at least a mail server host and a username");
+                return;
+            }
+
             SmtpClient client = new SmtpClient(Properties.Settings.Default.mailServerHost, Properties.Settings.Default.mailServerPort);
 
             client.Credentials = new NetworkCredential(Properties.Settings.Default.username, Crypto.ToInsecureString(Crypto.DecryptString(Properties.Settings.Default.password)));
@@ -80,7 +86,6 @@ namespace mailMe
                 msg.Subject = replacePlaceholder(Properties.Settings.Default.subject);
                 msg.Body = replacePlaceholder(Properties.Settings.Default.body);
                 msg.To.Add(new MailAddress(replacePlaceholder(Properties.Settings.Default.to)));
-                string userState = "Snarl email message ";
 
                 client.Send(msg);
             }

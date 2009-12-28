@@ -52,6 +52,12 @@ namespace mailMe
 
         private void sendTestmail()
         {
+            if (Properties.Settings.Default.mailServerHost == string.Empty || Properties.Settings.Default.username == string.Empty)
+            {
+                MessageBox.Show("Please set at least a mail server host and a username");
+                return;
+            }
+
             SmtpClient client = new SmtpClient(Properties.Settings.Default.mailServerHost, Properties.Settings.Default.mailServerPort);
 
             client.Credentials = new NetworkCredential(Properties.Settings.Default.username, Crypto.ToInsecureString(Crypto.DecryptString(Properties.Settings.Default.password)));
