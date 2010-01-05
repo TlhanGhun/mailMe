@@ -57,20 +57,27 @@ namespace mailMe
                 MessageBox.Show("Please set at least a mail server host and a username");
                 return;
             }
-
-            SmtpClient client = new SmtpClient(Properties.Settings.Default.mailServerHost, Properties.Settings.Default.mailServerPort);
-
-            client.Credentials = new NetworkCredential(Properties.Settings.Default.username, Crypto.ToInsecureString(Crypto.DecryptString(Properties.Settings.Default.password)));
-            client.EnableSsl = Properties.Settings.Default.mailServerUseSSL;
-
-            using (MailMessage msg = new MailMessage())
+            try
             {
-                msg.From = new MailAddress(replacePlaceholder(Properties.Settings.Default.from));
-                msg.Subject = replacePlaceholder(Properties.Settings.Default.subject);
-                msg.Body = replacePlaceholder(Properties.Settings.Default.body);
-                msg.To.Add(new MailAddress(replacePlaceholder(Properties.Settings.Default.to)));
 
-                client.Send(msg);
+                SmtpClient client = new SmtpClient(Properties.Settings.Default.mailServerHost, Properties.Settings.Default.mailServerPort);
+
+                client.Credentials = new NetworkCredential(Properties.Settings.Default.username, Crypto.ToInsecureString(Crypto.DecryptString(Properties.Settings.Default.password)));
+                client.EnableSsl = Properties.Settings.Default.mailServerUseSSL;
+
+                using (MailMessage msg = new MailMessage())
+                {
+                    msg.From = new MailAddress(replacePlaceholder(Properties.Settings.Default.from));
+                    msg.Subject = replacePlaceholder(Properties.Settings.Default.subject);
+                    msg.Body = replacePlaceholder(Properties.Settings.Default.body);
+                    msg.To.Add(new MailAddress(replacePlaceholder(Properties.Settings.Default.to)));
+
+                    client.Send(msg);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
